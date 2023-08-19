@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import './JsonDataStyle.css';
 import { Star } from './Star';
-const API = 'http://localhost:3002/movies/';
 
 export default function JsonData({ moviesData }) {
     return (

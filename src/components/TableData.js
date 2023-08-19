@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
-import './JsonDataStyle.css';
+import './TableData.css';
 import { Star } from './Star';
 
-export default function JsonData({ moviesData }) {
+export default function TableData({ moviesData }) {
     return (
         <>
             <table className="table-dark">

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import Header from './components/Header';
-import JsonData from './components/JsonData';
-const API = 'http://localhost:3002/movies/';
+import TableData from './components/TableData';
+
+//const API = 'http://localhost:3002/movies/';
+const API = 'https://vast-pink-cod-sari.cyclic.cloud/movies';
 
 function getMonth(isoDate) {
   const dateObj = new Date(isoDate);
@@ -97,7 +99,7 @@ function App() {
 
       <div className="row">
         <div className="col">
-          <JsonData moviesData={search(filteredMovies)} />
+          <TableData moviesData={search(filteredMovies)} />
         </div>
       </div>
 

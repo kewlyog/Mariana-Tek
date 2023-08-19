@@ -1,47 +1,10 @@
-import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
-// import { FaStar } from 'react-icons/fa';
 import './JsonDataStyle.css';
-// import { StarRatings } from './StarRatings';
 import { Star } from './Star';
 const API = 'http://localhost:3002/movies/';
 
-function getMonth(isoDate) {
-    const dateObj = new Date(isoDate);
-    const monthNames = [
-        "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
-        "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
-    ];
-
-    return monthNames[dateObj.getUTCMonth()];
-}
-
-export default function JsonData() {
-    const [moviesData, setMoviesData] = useState([]);
-
-    // <FontAwesomeIcon icon="fa-solid fa-calendar" style={{ color: "#d2d7df", }} />
-
-    useEffect(() => {
-        fetch(API).then((result) => {
-            result.json().then((resp) => {
-                // console.warn('result', resp);
-
-                const data = resp.flatMap(entry => entry.movies.map(movie => ({
-                    "day": new Date(entry.date).getUTCDate(),
-                    "month": getMonth(entry.date),
-                    "year": new Date(entry.date).getUTCFullYear(),
-                    "poster": movie.poster,
-                    "title": movie.title,
-                    "released": new Date(movie.released).getUTCFullYear(),
-                    "rating": movie.imdb_rating
-                })));
-
-                setMoviesData(data);
-            })
-        })
-    }, []);
-
+export default function JsonData({ moviesData }) {
     return (
         <>
             <table className="table-dark">
@@ -52,6 +15,7 @@ export default function JsonData() {
                         <th colSpan={2}>Film</th>
                         <th>Released</th>
                         <th>Rating</th>
+                        <th>Runtime</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,18 +29,25 @@ export default function JsonData() {
                                         }
                                     }>
                                         <FontAwesomeIcon icon={faCalendar}
-                                            style={{
-                                                position: 'absolute',
-                                                top: 0,
-                                                left: 0,
-                                                width: '100%',
-                                                height: '100%',
-                                                opacity: 0.5,  // Adjust opacity if needed
-                                            }} />
+                                            style={
+                                                index > 0
+                                                    && moviesData[index - 1].month === movie.month
+                                                    ?
+                                                    {
+                                                        display: 'none'
+                                                    }
+                                                    :
+                                                    {
+                                                        position: 'absolute',
+                                                        width: '100%',
+                                                        height: '100%',
+                                                        opacity: 0.1,
+                                                    }
+                                            } />
                                         <div style={{
                                             position: 'relative',
-                                            zIndex: 1,
-                                            padding: '5px'
+                                            padding: '5px',
+                                            color: '#9773ab',
                                         }}>
                                             <div className='row justify-content-center'>
                                                 {index > 0
@@ -91,7 +62,6 @@ export default function JsonData() {
                                                         ? '' : movie.year
                                                 }
                                             </div>
-                                            {/* <FontAwesomeIcon icon={faCalendar} /> */}
                                         </div>
                                     </div>
 
@@ -118,6 +88,9 @@ export default function JsonData() {
                                 </td>
                                 <td>
                                     <Star stars={movie.rating} />
+                                </td>
+                                <td>
+                                    {movie.runtime}
                                 </td>
                             </tr>
                         ))

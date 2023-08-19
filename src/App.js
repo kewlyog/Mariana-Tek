@@ -1,11 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import './App.css';
-// import OrderedList from './components/OrderedList';
-// import TableData from './components/TableData';
-// import Table from './components/Table';
-// import DivData from './components/DivData';
-// import DivTable from './components/DivTable';
-import Filter from './components/Filter';
 import Header from './components/Header';
 import JsonData from './components/JsonData';
 const API = 'http://localhost:3002/movies/';
@@ -54,8 +47,6 @@ function App() {
     <div className="container-md">
 
       <Header />
-      {/* <Filter moviesData={moviesData} handleValueFromChild={handleValueFromChild} /> */}
-      {/* <JsonData moviesData={moviesData} setMoviesData={setMoviesData} /> */}
 
       <div className="row">
         <div className="col">

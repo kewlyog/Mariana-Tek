@@ -19,20 +19,7 @@ function App() {
 
   const [moviesData, setMoviesData] = useState([]);
 
-  const [uniqueGenres, setUniqueGenres] = useState([]);
   const [selectedGenres, setSelectedGenres] = useState([]);
-
-  const search = (data) => {
-    return data.filter(
-      (item) => item.title.toLowerCase().includes(query)
-        || item.genre.toLowerCase().includes(selectedGenres)
-    );
-  };
-
-  const options = uniqueGenres.map(genre => ({
-    value: genre,
-    label: genre,
-  }));
 
   useEffect(() => {
     fetch(API).then((result) => {
@@ -50,26 +37,21 @@ function App() {
           "genre": movie.genre
         })));
 
-        const genresSet = new Set();
-
-        data.forEach(item => {
-          item.genre.forEach(genre => {
-            genresSet.add(genre);
-          });
-        });
-
-        // console.log(genresSet);
-
-        setUniqueGenres(Array.from(genresSet));
-
         setMoviesData(data);
       })
     })
   }, []);
 
-  const handleGenreChange = selectedOptions => {
-    console.log('selectedOptions', selectedOptions);
-    setSelectedGenres(selectedOptions);
+  const filteredMovies = moviesData.filter(movie =>
+    selectedGenres.every(genre => movie.genre.includes(genre.value))
+  );
+
+  const genreOptions = [...new Set(moviesData.flatMap(movie => movie.genre))].map(genre => ({ value: genre, label: genre }));
+
+  const search = (data) => {
+    return data.filter(
+      (item) => item.title.toLowerCase().includes(query)
+    );
   };
 
   return (
@@ -83,17 +65,11 @@ function App() {
 
       <div className="row">
         <div className="col">
-          {/* <select className="form-select list-group-item-dark"
-            multiple aria-label="multiple select example">
-            <option defaultValue={0}>Select Genre</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-          </select> */}
           <Select styles={{
-            control: (baseStyles, state) => ({
+            control: (baseStyles) => ({
               ...baseStyles,
               backgroundColor: '#212529',
+              borderColor: '#3b3f45'
             }),
             menu: (baseStyles) => ({
               ...baseStyles,
@@ -106,22 +82,22 @@ function App() {
             })
           }}
             isMulti className='dark' placeholder='Select Genre'
-            options={options} value={selectedGenres} onChange={handleGenreChange}
+            options={genreOptions} value={selectedGenres}
+            onChange={selectedOptions => setSelectedGenres(selectedOptions)}
           />
           <br />
-          {/* <p>Selected Genres: {selectedGenres.map(genre => genre.value).join(', ')}</p> */}
         </div>
         <div className="col">
-          {/* <label className="form-label text-light">Search Movie</label> */}
-          <input type="text" className="form-control bg-dark text-light" placeholder='Search Movie'
-            id="searchText" onChange={(event) => setQuery(event.target.value)}
+          <input type="text" className="form-control bg-dark text-light"
+            placeholder='Search Movie' id="searchText" style={{ borderColor: '#3b3f45' }}
+            onChange={(event) => setQuery(event.target.value)}
           />
         </div>
       </div>
 
       <div className="row">
         <div className="col">
-          <JsonData moviesData={search(moviesData)} />
+          <JsonData moviesData={search(filteredMovies)} />
         </div>
       </div>
 

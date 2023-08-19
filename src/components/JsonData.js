@@ -20,8 +20,6 @@ function getMonth(isoDate) {
 export default function JsonData() {
     const [moviesData, setMoviesData] = useState([]);
 
-    // <FontAwesomeIcon icon="fa-solid fa-calendar" style={{ color: "#d2d7df", }} />
-
     useEffect(() => {
         fetch(API).then((result) => {
             result.json().then((resp) => {
@@ -65,18 +63,28 @@ export default function JsonData() {
                                         }
                                     }>
                                         <FontAwesomeIcon icon={faCalendar}
-                                            style={{
-                                                position: 'absolute',
-                                                top: 0,
-                                                left: 0,
-                                                width: '100%',
-                                                height: '100%',
-                                                opacity: 0.5,  // Adjust opacity if needed
-                                            }} />
+                                            style={
+                                                index > 0
+                                                    && moviesData[index - 1].month === movie.month
+                                                    ?
+                                                    {
+                                                        display: 'none'
+                                                    }
+                                                    :
+                                                    {
+                                                        position: 'absolute',
+                                                        width: '100%',
+                                                        height: '100%',
+                                                        opacity: 0.1,
+                                                        // top: 0,
+                                                        // left: 0,
+                                                    }
+                                            } />
                                         <div style={{
                                             position: 'relative',
-                                            zIndex: 1,
-                                            padding: '5px'
+                                            padding: '5px',
+                                            color: '#9773ab',
+                                            // zIndex: 1,
                                         }}>
                                             <div className='row justify-content-center'>
                                                 {index > 0

@@ -7,41 +7,67 @@ import './JsonDataStyle.css';
 import { Star } from './Star';
 const API = 'http://localhost:3002/movies/';
 
-function getMonth(isoDate) {
-    const dateObj = new Date(isoDate);
-    const monthNames = [
-        "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
-        "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
-    ];
+// function getMonth(isoDate) {
+//     const dateObj = new Date(isoDate);
+//     const monthNames = [
+//         "JAN", "FEB", "MAR", "APR", "MAY", "JUN",
+//         "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"
+//     ];
 
-    return monthNames[dateObj.getUTCMonth()];
-}
+//     return monthNames[dateObj.getUTCMonth()];
+// }
 
-export default function JsonData() {
-    const [moviesData, setMoviesData] = useState([]);
+export default function JsonData({ moviesData }) {
+    // const [moviesData, setMoviesData] = useState([]);
 
-    useEffect(() => {
-        fetch(API).then((result) => {
-            result.json().then((resp) => {
-                // console.warn('result', resp);
+    // const filterMovies = (event) => {
+    //     setMoviesData(
+    //         moviesData.filter(movie => movie.title.toLowerCase().includes(event.target.value))
+    //     );
+    // }
 
-                const data = resp.flatMap(entry => entry.movies.map(movie => ({
-                    "day": new Date(entry.date).getUTCDate(),
-                    "month": getMonth(entry.date),
-                    "year": new Date(entry.date).getUTCFullYear(),
-                    "poster": movie.poster,
-                    "title": movie.title,
-                    "released": new Date(movie.released).getUTCFullYear(),
-                    "rating": movie.imdb_rating
-                })));
+    // useEffect(() => {
+    //     fetch(API).then((result) => {
+    //         result.json().then((resp) => {
+    //             // console.warn('result', resp);
 
-                setMoviesData(data);
-            })
-        })
-    }, []);
+    //             const data = resp.flatMap(entry => entry.movies.map(movie => ({
+    //                 "day": new Date(entry.date).getUTCDate(),
+    //                 "month": getMonth(entry.date),
+    //                 "year": new Date(entry.date).getUTCFullYear(),
+    //                 "poster": movie.poster,
+    //                 "title": movie.title,
+    //                 "released": new Date(movie.released).getUTCFullYear(),
+    //                 "rating": movie.imdb_rating
+    //             })));
+
+    //             setMoviesData(data);
+    //         })
+    //     })
+    // }, []);
 
     return (
         <>
+            {/* <div className="row">
+                <div className="col">
+                    <select className="form-select list-group-item-dark"
+                        multiple aria-label="multiple select example">
+                        <option defaultValue={0}>Select Genre</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                        <option value="1">One</option>
+                        <option value="2">Two</option>
+                        <option value="3">Three</option>
+                    </select>
+                </div>
+                <div className="col">
+                    <label className="form-label text-light">Search Movie</label>
+                    <input type="text" className="form-control bg-dark text-light"
+                        id="searchText" onChange={setMoviesData}
+                    />
+                </div>
+            </div> */}
             <table className="table-dark">
                 <thead>
                     <tr>
@@ -50,6 +76,7 @@ export default function JsonData() {
                         <th colSpan={2}>Film</th>
                         <th>Released</th>
                         <th>Rating</th>
+                        <th>Runtime</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -126,6 +153,9 @@ export default function JsonData() {
                                 </td>
                                 <td>
                                     <Star stars={movie.rating} />
+                                </td>
+                                <td>
+                                    {movie.runtime}
                                 </td>
                             </tr>
                         ))

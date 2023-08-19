@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Header = () => {
+export default function Header() {
     return (
         <>
             <nav className="navbar navbar-expand-md navbar-dark bg-dark" style={{ marginTop: 30, marginBottom: 30 }}>

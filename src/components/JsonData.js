@@ -15,6 +15,7 @@ export default function JsonData({ moviesData }) {
                         <th>Released</th>
                         <th>Rating</th>
                         <th>Runtime</th>
+                        <th>Genre</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -90,6 +91,9 @@ export default function JsonData({ moviesData }) {
                                 </td>
                                 <td>
                                     {movie.runtime}
+                                </td>
+                                <td>
+                                    {movie.genre.join(', ')}
                                 </td>
                             </tr>
                         ))

@@ -1,4 +1,6 @@
-This app is about a movie listings where we can see details about Movies, Genres, Ratings, Released year etc.
+This app is about the movie listings where we can see details about Movies, Genres, Ratings, Released year etc.
+
+Demo: https://mariana-tek-39if.vercel.app
 
 # Getting Started with Create React App
 

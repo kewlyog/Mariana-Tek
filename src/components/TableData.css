@@ -10,10 +10,6 @@ table td, table th {
   border-bottom: 1px solid #3b3f44;
 }
 
-table td td {
-  border-bottom: 0;
-}
-
 table th {
   padding-top: 12px;
   padding-bottom: 12px;
@@ -21,33 +17,31 @@ table th {
   font-weight: 100;
 }
 
-.calender-icon {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: '100%';
-    height: '100%';
-}
-
 table img {
     max-width: 35px;
     height: auto;
 }
 
-.movie-title {
-    font-family: TiemposTextWeb-Semibold,Georgia,serif;
-    font-size: 1.3rem;
-    font-weight: 400;
-    color: #fff;
+#calender {
+  position: relative;
 }
 
-.calender:hover, .day:hover, .movie-title:hover {
+#movie-row:hover, #movie-title:hover {
     color: #f0582b;
     cursor:pointer;
 }
 
-#starRadio {
-    display: none;
+#calender-text {
+  position: relative;
+  padding: 5px;
+  color: #9773ab;
+}
+
+#movie-title {
+    font-family: TiemposTextWeb-Semibold,Georgia,serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #fff;
 }
 
 .star {

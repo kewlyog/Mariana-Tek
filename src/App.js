@@ -81,7 +81,15 @@ function App() {
             multiValue: (baseStyles) => ({
               ...baseStyles,
               backgroundColor: '#9ba2a9',
-            })
+            }),
+            indicatorsContainer: (baseStyles) => ({
+              ...baseStyles,
+              color: '#778088 !important',
+            }),
+            indicatorSeparator: (baseStyles) => ({
+              ...baseStyles,
+              backgroundColor: '#778088',
+            }),
           }}
             isMulti className='dark' placeholder='Select Genre'
             options={genreOptions} value={selectedGenres}

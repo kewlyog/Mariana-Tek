@@ -21,13 +21,9 @@ export default function TableData({ moviesData }) {
                 <tbody>
                     {
                         moviesData.map((movie, index) => (
-                            <tr key={index}>
+                            <tr key={index} id="movie-row">
                                 <td>
-                                    <div className='calender' style={
-                                        {
-                                            position: 'relative'
-                                        }
-                                    }>
+                                    <div id='calender'>
                                         <FontAwesomeIcon icon={faCalendar}
                                             style={
                                                 index > 0
@@ -44,11 +40,7 @@ export default function TableData({ moviesData }) {
                                                         opacity: 0.1,
                                                     }
                                             } />
-                                        <div style={{
-                                            position: 'relative',
-                                            padding: '5px',
-                                            color: '#9773ab',
-                                        }}>
+                                        <div id="calender-text">
                                             <div className='row justify-content-center'>
                                                 {index > 0
                                                     && moviesData[index - 1].month === movie.month
@@ -67,19 +59,19 @@ export default function TableData({ moviesData }) {
 
                                 </td>
                                 <td>
-                                    <div className='day'>
-                                        {index > 0
-                                            && moviesData[index - 1].month === movie.day
-                                            ? '' : movie.day}
+                                    <div>
+                                        {movie.day}
                                     </div>
                                 </td>
                                 <td>
-                                    <img src={movie.poster === 'N/A'
-                                        ? 'https://www.reelviews.net/resources/img/default_poster.jpg'
-                                        : movie.poster} alt={movie.title} />
+                                    <img src={
+                                        movie.poster === 'N/A'
+                                            ? 'https://www.reelviews.net/resources/img/default_poster.jpg'
+                                            : movie.poster
+                                    } alt={movie.title} />
                                 </td>
                                 <td>
-                                    <div className='movie-title'>
+                                    <div id='movie-title'>
                                         {movie.title}
                                     </div>
                                 </td>

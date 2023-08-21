@@ -1,3 +1,5 @@
+This app is about a movie listings where we can see details about Movies, Genres, Ratings, Released year etc.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
